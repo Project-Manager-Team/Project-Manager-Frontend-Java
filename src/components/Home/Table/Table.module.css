@@ -1,0 +1,38 @@
+/* index.module.css */
+.table {
+  border-collapse: separate;
+  border-spacing: 5 20px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+  font-size: 16px; /* Increase font size */
+  width: 100%; /* Chiều rộng bảng */
+}
+
+
+.tableHead {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  color: #333;
+  font-weight: bold;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.tableRow {
+  padding: 20px !important;
+  width: 50%;
+  height: 40%;
+}
+
+.th {
+  border-radius: 10px;
+}
+
+.wrapperButtonCreate {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}

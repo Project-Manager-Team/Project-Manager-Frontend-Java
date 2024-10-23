@@ -1,0 +1,118 @@
+/* Avatar.css */
+
+.avatar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+}
+
+.avatar__icon {
+  font-size: 2.5rem; 
+  color: #333; /* Màu sắc cho icon */
+  transition: color 0.3s;
+}
+
+.avatar__icon:hover {
+  color: #3498db; /* Màu sắc thay đổi khi hover */
+}
+
+/* Đổi mật khẩu và thông tin avatar */
+.avatar__info,
+.avatar__changePassForm {
+  position: absolute;
+  top: 110%; /* Điều chỉnh lại vị trí */
+  left: 50%; /* Căn giữa theo chiều ngang */
+  transform: translateX(-50%); /* Dịch chuyển sang trái một nửa chiều rộng để căn giữa */
+  background: #ffffff; /* Nền trắng cho thông tin */
+  border-radius: 12px;
+  padding: 20px;
+  width: 280px; /* Độ rộng đồng nhất */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Bóng đổ nhẹ */
+  z-index: 1;
+  margin-top: 10px; /* Khoảng cách giữa icon và thông tin */
+}
+
+.avatar__info {
+  display: flex;
+  flex-direction: column; /* Để căn giữa các phần tử trong thông tin */
+  align-items: center; /* Căn giữa các phần tử */
+}
+
+/* Tên và email */
+.avatar__username,
+.avatar__email {
+  margin: 0;
+  padding: 8px 0;
+  color: #444; /* Màu chữ đậm */
+  font-weight: bold; /* Chữ in đậm */
+  text-align: center;
+}
+
+.avatar__email {
+  font-size: 0.9rem; /* Kích thước chữ email nhỏ hơn */
+  color: #777; /* Màu nhạt hơn cho email */
+}
+
+/* Nút đổi mật khẩu */
+.avatar__changepass {
+  margin-top: 15px; /* Khoảng cách trên nút */
+  padding: 10px;
+  background-color: #3498db; /* Nền nút màu xanh */
+  color: white; /* Chữ màu trắng */
+  border-radius: 8px; /* Bo góc nút */
+  text-align: center; /* Canh giữa chữ */
+  cursor: pointer; /* Đổi con trỏ khi hover */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Hiệu ứng hover */
+}
+
+.avatar__changepass:hover {
+  background-color: #2980b9; /* Màu nền tối hơn khi hover */
+  transform: scale(1.05); /* Hiệu ứng phóng to khi hover */
+}
+
+/* CSS cho form đổi mật khẩu */
+.avatar__changePassForm {
+  display: flex;
+  flex-direction: column; /* Để căn giữa các phần tử trong form */
+}
+
+.avatar__changePassForm h3 {
+  text-align: center; /* Canh giữa tiêu đề */
+  margin-bottom: 15px; /* Khoảng cách dưới tiêu đề */
+  color: #333; /* Màu chữ cho tiêu đề */
+}
+
+.avatar__changePassForm input {
+  width: 100%; /* Chiều rộng 100% */
+  padding: 10px;
+  margin: 8px 0; /* Khoảng cách giữa các input */
+  border-radius: 8px; /* Bo góc */
+  border: 1px solid #ccc; /* Viền màu xám nhạt */
+  font-size: 1rem; /* Kích thước chữ */
+  transition: border-color 0.3s ease; /* Hiệu ứng chuyển màu viền */
+}
+
+.avatar__changePassForm input:focus {
+  border-color: #3498db; /* Màu viền khi focus */
+  outline: none; /* Ẩn outline mặc định */
+}
+
+.avatar__changePassForm button {
+  width: 100%; /* Chiều rộng 100% */
+  padding: 10px;
+  margin-top: 10px; /* Khoảng cách trên nút */
+  background-color: #2ecc71; /* Màu nền cho nút */
+  color: white; /* Chữ màu trắng */
+  border: none; /* Ẩn viền */
+  border-radius: 8px; /* Bo góc nút */
+  font-size: 1rem; /* Kích thước chữ */
+  cursor: pointer; /* Đổi con trỏ khi hover */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Hiệu ứng hover */
+}
+
+.avatar__changePassForm button:hover {
+  background-color: #27ae60; /* Màu nền tối hơn khi hover */
+  transform: scale(1.05); /* Hiệu ứng phóng to khi hover */
+}

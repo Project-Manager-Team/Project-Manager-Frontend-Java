@@ -1,0 +1,42 @@
+/* Home.module.css */
+.homeContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding-top: 60px; /* Space for the fixed top bar */
+}
+
+.historyWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 10px 20px; /* Adjusted padding */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  height: 60px; /* Set a fixed height for the top bar */
+}
+
+.notificationWrapper {
+  display: flex;
+  align-items: center;
+  margin-right: 0px;
+}
+.avatarWrapper {
+  display: flex;
+  align-items: center;
+  margin-right: 10%; /* Align to the right without fixed position */
+}
+
+.tableWrapper {
+  flex: 1;
+  padding: 0 80px; /* Left and right padding */
+  overflow-y: auto;
+  margin-top: 60px; /* Space below the fixed top bar */
+}

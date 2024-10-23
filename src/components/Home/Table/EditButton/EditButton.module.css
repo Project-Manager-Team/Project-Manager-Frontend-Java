@@ -1,0 +1,52 @@
+/* EditButton.module.css */
+.button {
+  padding: 10px 18px;
+  /* background-color: rgba(0, 0, 255, 0.1); Transparent blue background */
+  border: 2px solid rgba(0, 0, 255, 0.7); /* Blue border */
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 20px;
+  color: #333;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  border: none;
+}
+
+.button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.5)
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.button:hover {
+  background-color: rgba(
+    0,
+    0,
+    255,
+    0.2
+  ); /* Slightly less transparent on hover */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.button:hover::before {
+  opacity: 1;
+}
+
+.button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

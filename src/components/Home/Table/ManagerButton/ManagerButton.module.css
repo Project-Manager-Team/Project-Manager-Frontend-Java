@@ -1,0 +1,59 @@
+/* ManagerButton.module.css */
+.manager {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+.manager th,
+.manager td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+input {
+  width: 300px;
+}
+.manager th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.manager input[type="text"] {
+  width: 300px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.button__cancel {
+  width: 100%;
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+.button__cancel:hover {
+  background-color: #ff1a1a;
+}
+
+.button__add {
+  width: 100%;
+  background-color: rgba(66, 135, 245, 0.6);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button__add:hover {
+  background-color: #45a049;
+}
