@@ -9,8 +9,8 @@ function Home() {
   const [reloadTableData, setReloadTableData] = useState(false);
   const [history, setHistory] = useState([
     {
-      url: `${API_BASE_URL}/project/personal/`,
-      title: "Home",
+      url: `${API_BASE_URL}/projects/`,
+      name: "Home",
     },
   ]);
 
@@ -18,7 +18,7 @@ function Home() {
     <div className={styles.homeContainer}>
       <div className={styles.historyWrapper}>
         <HistoryBar
-          setReloadTableData={setReloadTableData}
+          setReloadTableData={setReloadTableData} 
           history={history}
           setHistory={setHistory}
         />

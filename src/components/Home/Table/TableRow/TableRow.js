@@ -76,10 +76,10 @@ function ProjectItem({
       </td>
       <td className={style.projectCell}>
         <input
-          value={item.title}
+          value={item.name}
           disabled={item.isDisabled}
           onChange={handleEditValue}
-          name="title"
+          name="name"
           placeholder="Tiêu đề"
         />
       </td>
@@ -105,10 +105,10 @@ function ProjectItem({
       <td className={style.projectCell}>
         <input
           type="datetime-local"
-          value={formatDatetimeForInput(item.time_end)}
+          value={formatDatetimeForInput(item.deadline)}
           disabled={item.isDisabled}
           onChange={handleEditValue}
-          name="time_end"
+          name="deadline"
         />
       </td>
       <td className={style.projectCell}>
@@ -126,7 +126,8 @@ function ProjectItem({
             <input
               type="checkbox"
               className={style.hiddenCheckbox}
-              checked={isFinished}
+                checked={isFinished}
+                name="isFinished"
               onChange={handleCheckboxChange}
             />
             <span className={style.customCheckbox}></span>

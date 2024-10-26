@@ -8,12 +8,6 @@ function SignUp() {
   const [password, setPass] = useState("");
   const [email, setEmail] = useState("");
   const navigate = useNavigate();
-
-  const handleClick = () => {
-    console.log(username);
-    console.log(email);
-    console.log(password);
-  };
   const changeUsername = (e) => {
     setUser(e.target.value);
   };
@@ -27,7 +21,7 @@ function SignUp() {
     event.preventDefault();
 
     try {
-      const { data } = await axios.post(`${API_BASE_URL}/user/register/`, {
+      const { data } = await axios.post(`${API_BASE_URL}/users/register/`, {
         username,
         email,
         password,
@@ -105,7 +99,6 @@ function SignUp() {
                       className="btn btn-primary btn-lg btn-block button"
                       type="submit"
                       style={{ width: "100%", marginBottom: "20px" }}
-                      onClick={handleClick}
                     >
                       Sign Up
                     </button>

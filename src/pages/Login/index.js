@@ -35,7 +35,7 @@ function Login() {
     }
 
     try {
-      const { data } = await axios.post(`${API_BASE_URL}/user/token/`, {
+      const { data } = await axios.post(`${API_BASE_URL}/users/token/`, {
         username,
         password,
       });
@@ -43,7 +43,7 @@ function Login() {
       localStorage.setItem("refresh", data.refresh);
       setTimeout(() => {
         navigate("/home");
-      }, 200);
+      }, 1000);
     } catch (error) {
       showError("Đăng nhập thất bại");
     }

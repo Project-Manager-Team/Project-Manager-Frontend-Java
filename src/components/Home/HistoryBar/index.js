@@ -26,7 +26,7 @@ const HistoryBar = ({ history, setHistory, setReloadTableData }) => {
             }}
           >
             <span className={styles.icon}>📁</span>
-            {item.title}
+            {item.name}
           </button>
         </React.Fragment>
       ))}

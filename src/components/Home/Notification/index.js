@@ -14,7 +14,7 @@ function Notification({ setReloadTableData }) {
 
   const accessToken = localStorage.getItem("access");
   const getInvitations = async () => {
-    const response = await fetch(`${API_BASE_URL}/invitation/`, {
+    const response = await fetch(`${API_BASE_URL}/invitations/`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -28,8 +28,9 @@ function Notification({ setReloadTableData }) {
     try {
       const data = await getInvitations();
       data.reverse().map((item) => {
-        if (item.status === null) item.isReplied = false;
-        else item.isReplied = true;
+        item.status === "PENDING"
+          ? (item.isReplied = false)
+          : (item.isReplied = true);
         return item;
       });
       setInvitations(data);
@@ -47,8 +48,8 @@ function Notification({ setReloadTableData }) {
   };
 
   const editInvitation = async (item, invitationID) => {
-    await fetch(`${API_BASE_URL}/invitation/${invitationID}/`, {
-      method: "PATCH",
+    await fetch(`${API_BASE_URL}/invitations/${invitationID}/${item.status}/`, {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${accessToken}`,

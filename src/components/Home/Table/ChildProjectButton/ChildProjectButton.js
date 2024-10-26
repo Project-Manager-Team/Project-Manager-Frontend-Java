@@ -5,16 +5,15 @@ import { GrTask } from "react-icons/gr";
 import { showError } from "../swal";
 import { API_BASE_URL } from "../api";
 
-
-function ChildProjectButton({ item, setHistory}) {
+function ChildProjectButton({ item, setHistory }) {
   const handleChildItem = async () => {
     try {
       setHistory((prev) => [
         ...prev,
         {
           id: item.id,
-          title: item.title,
-          url: `${API_BASE_URL}/project/${item.id}/child/`,
+          name: item.name,
+          url: `${API_BASE_URL}/projects/${item.id}/subprojects/`,
         },
       ]);
     } catch (error) {
@@ -24,7 +23,7 @@ function ChildProjectButton({ item, setHistory}) {
 
   return (
     <button className={styles.button} onClick={handleChildItem}>
-      {item.type === "task" ? <MdOutlineTask /> : <GrTask />}
+      {item.type === "TASK" ? <MdOutlineTask /> : <GrTask />}
     </button>
   );
 }

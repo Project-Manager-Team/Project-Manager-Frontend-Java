@@ -4,7 +4,7 @@ import { RxAvatar } from "react-icons/rx";
 import "./Avatar.css";
 import { API_BASE_URL } from "../Table/api";
 import { showError, showSuccess } from "../Table/swal";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Avatar() {
   const navigate = useNavigate();
@@ -44,15 +44,15 @@ function Avatar() {
   const changePassword = async () => {
     const accessToken = localStorage.getItem("access");
     try {
-      const response = await fetch(`${API_BASE_URL}/user/change-password/`, {
+      const response = await fetch(`${API_BASE_URL}/users/change-password/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${accessToken}`,
         },
         body: JSON.stringify({
-          old_password: oldPassword,
-          new_password: newPassword,
+          oldPassword,
+          newPassword,
         }),
       });
       if (response.status !== 200) {
