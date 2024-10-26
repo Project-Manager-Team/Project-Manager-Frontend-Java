@@ -42,8 +42,8 @@ function Manager({ item }) {
 
   const [data, setData] = useState({
     title: "",
-    context: "",
-    username: "",
+    description: "",
+    receiver: "",
   });
 
   const handleChange = (e) => {
@@ -69,13 +69,14 @@ function Manager({ item }) {
     if (!response.ok) {
       throw new Error("Failed to create project");
     }
-
-    return await response.json();
   };
 
   const handleInvitation = async () => {
     try {
-      await invitation(accessToken, `${API_BASE_URL}/invitation/`);
+      await invitation(
+        accessToken,
+        `${API_BASE_URL}/projects/${item.id}/invite/`
+      );
       await showSuccess("Gửi lời mời thành công");
     } catch (error) {
       await showError("Gửi lời mời thất bại");
@@ -105,9 +106,13 @@ function Manager({ item }) {
                   </td>
                 </tr>
                 <tr>
-                  <th>Context</th>
+                  <th>decription</th>
                   <td>
-                    <input type="text" name="context" onChange={handleChange} />
+                    <input
+                      type="text"
+                      name="description"
+                      onChange={handleChange}
+                    />
                   </td>
                 </tr>
                 <tr>
@@ -115,7 +120,7 @@ function Manager({ item }) {
                   <td>
                     <input
                       type="text"
-                      name="username"
+                      name="receiver"
                       onChange={handleChange}
                     />
                   </td>

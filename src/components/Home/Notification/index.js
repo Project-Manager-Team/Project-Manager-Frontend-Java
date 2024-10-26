@@ -14,13 +14,20 @@ function Notification({ setReloadTableData }) {
 
   const accessToken = localStorage.getItem("access");
   const getInvitations = async () => {
-    const response = await fetch(`${API_BASE_URL}/invitations/`, {
+    var response = await fetch(`${API_BASE_URL}/invitations/`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
     });
     const data = await response.json();
+    response = await fetch(`${API_BASE_URL}/myInvitations/`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    data.push(...(await response.json()));
     return data;
   };
 
@@ -47,36 +54,38 @@ function Notification({ setReloadTableData }) {
     setNotification(!notification);
   };
 
-  const editInvitation = async (item, invitationID) => {
-    await fetch(`${API_BASE_URL}/invitations/${invitationID}/${item.status}/`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
-      },
-      body: JSON.stringify(item),
-    });
+  const editInvitation = async (item) => {
+    await fetch(
+      `${API_BASE_URL}/invitations/${item.id}/${item.status.toLowerCase()}/`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
     setReloadAPI(!reloadAPI);
   };
 
   const handleReply = async (item, status) => {
     item.status = status;
     item.isReplied = true;
-    if (status === true) {
-      item.context = "Bạn đã chấp nhận lời mời";
+    if (status === "ACCEPT") {
+      item.description = "Bạn đã chấp nhận lời mời";
       setTimeout(() => {
         setReloadTableData((prev) => !prev);
       }, 200);
     } else {
-      item.context = "Bạn đã từ chối lời mời";
+      item.description = "Bạn đã từ chối lời mời";
     }
-    await editInvitation(item, item.id);
+    await editInvitation(item);
   };
 
   const deleteInvitation = async (invitationID) => {
     try {
       const response = await fetch(
-        `${API_BASE_URL}/invitation/${invitationID}/`,
+        `${API_BASE_URL}/invitations/${invitationID}/`,
         {
           method: "DELETE",
           headers: {
@@ -115,19 +124,19 @@ function Notification({ setReloadTableData }) {
           {invitations.map((item, index) => (
             <div className="notification-item" key={index}>
               <div className="notification-item-title">{item.title}</div>
-              <div className="notification-item-context">{item.context}</div>
+              <div className="notification-item-context">{item.description}</div>
               {item.isReplied === false && (
                 <form
                   onSubmit={(e) => {
                     e.preventDefault();
-                    const status = JSON.parse(e.nativeEvent.submitter.value);
+                    const status = e.nativeEvent.submitter.value;
                     handleReply(item, status);
                   }}
                 >
-                  <button type="submit" value={true}>
+                  <button type="submit" value="ACCEPT">
                     Chấp nhận
                   </button>
-                  <button type="submit" value={false}>
+                  <button type="submit" value="REJECT">
                     Từ chối
                   </button>
                 </form>

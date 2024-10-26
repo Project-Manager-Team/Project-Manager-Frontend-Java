@@ -44,16 +44,13 @@ function ProjectItem({
   }, [item.progress]);
 
   const handleFinishProject = async () => {
-    const url = `${API_BASE_URL}/project/${item.id}/`;
+    const url = `${API_BASE_URL}/projects/${item.id}/`;
     const response = await fetch(url, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${accessToken}`,
       },
-      body: JSON.stringify({
-        progress: isFinished ? 0 : 100,
-      }),
     });
 
     if (!response.ok) {

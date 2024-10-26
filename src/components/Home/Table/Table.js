@@ -92,6 +92,7 @@ function Table({ setReloadTableData, setHistory, current, reloadTableData }) {
     });
     setIsEditing(true);
     setEditingValue(item);
+    
   }, []);
 
   const handleSaveItem = useCallback(
@@ -129,12 +130,10 @@ function Table({ setReloadTableData, setHistory, current, reloadTableData }) {
       setEditingValue({});
       await refreshProjectList();
     } catch (error) {
-      console.log(error);
       await showError("Failed to create project");
     }
   }, [editingValue, refreshProjectList, current]);
 
-  
   return (
     <div>
       <table className={style.table}>

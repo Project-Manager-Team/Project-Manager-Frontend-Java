@@ -33,8 +33,6 @@ export async function putProject(accessToken, url, editedValue) {
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-
-    return await response.json();
   } catch (error) {
     throw error;
   }
@@ -84,7 +82,7 @@ export const createProject = async (accessToken, url, projectData) => {
       Authorization: `Bearer ${accessToken}`,
     },
     body: JSON.stringify({
-      ...projectData, 
+      ...projectData,
     }),
   });
   if (!response.ok) {
