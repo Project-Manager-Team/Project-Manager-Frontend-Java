@@ -4,7 +4,7 @@ import "sweetalert2/src/sweetalert2.scss";
 import ProjectItem from "./TableRow/TableRow";
 import CreateProjectButton from "./CreateButton/CreateButton";
 import {
-  putProject,
+  updateProject,
   getListProject,
   createProject,
   API_BASE_URL,
@@ -22,7 +22,7 @@ function Table({ setReloadTableData, setHistory, current, reloadTableData }) {
     try {
       const data = await getListProject(accessToken, url);
       const sortedProjects = data
-        .filter((project) => project.type !== "ROOT")
+        .filter((project) => project.type !== "personal")
         .sort((a, b) => a.id - b.id)
         .map((item, index) => ({
           ...item,
@@ -32,8 +32,7 @@ function Table({ setReloadTableData, setHistory, current, reloadTableData }) {
           isEditing: false,
         }));
       setProjects(sortedProjects);
-      const root = data.find((project) => project.type === "ROOT"); 
-      return root;
+      return data;
     } catch (error) {
       await showError("Failed to fetch data");
       return [];
@@ -43,11 +42,9 @@ function Table({ setReloadTableData, setHistory, current, reloadTableData }) {
   useEffect(() => {
     const fetchInitialData = async () => {
       try {
-        const root = await getAndSetProject(current.url);
-        if (root != [] && root != undefined)
-          current.id = root.id;
+        await getAndSetProject(current.url);
       } catch (error) {
-        await showError("Failed to initial data");
+        await showError("Failed to fetch data");
       }
     };
 
@@ -66,9 +63,9 @@ function Table({ setReloadTableData, setHistory, current, reloadTableData }) {
   const editProject = useCallback(
     async (projectID) => {
       try {
-        await putProject(
+        await updateProject(
           accessToken,
-          `${API_BASE_URL}/projects/${projectID}/`,
+          `${API_BASE_URL}/project/${projectID}/`,
           editingValue
         );
         await showSuccess("Updated project successfully");
@@ -92,7 +89,6 @@ function Table({ setReloadTableData, setHistory, current, reloadTableData }) {
     });
     setIsEditing(true);
     setEditingValue(item);
-    
   }, []);
 
   const handleSaveItem = useCallback(
@@ -106,26 +102,15 @@ function Table({ setReloadTableData, setHistory, current, reloadTableData }) {
     },
     [editProject]
   );
-  const handleCreateTempItem = useCallback((e) => {
-    setProjects((prevProjects) => [
-      ...prevProjects,
-      {
-        index: prevProjects.length + 1,
-        name: null,
-        description: null,
-        time_start: null,
-        deadline: null,
-        isDisabled: false,
-        isCreating: true,
-      },
-    ]);
-    setEditingValue({});
-  }, []);
 
   const handleCreateItem = useCallback(async () => {
+    const newProject = {
+      ...editingValue,
+      parent_id: current.id || null,
+    };
 
     try {
-      await createProject(accessToken, `${API_BASE_URL}/projects/${current.id}/subprojects/`, editingValue);
+      await createProject(accessToken, `${API_BASE_URL}/project/`, newProject);
       await showSuccess("Created project successfully");
       setEditingValue({});
       await refreshProjectList();
@@ -134,6 +119,22 @@ function Table({ setReloadTableData, setHistory, current, reloadTableData }) {
     }
   }, [editingValue, refreshProjectList, current]);
 
+  const handleCreateTempItem = useCallback((e) => {
+    setProjects((prevProjects) => [
+      ...prevProjects,
+      {
+        index: prevProjects.length + 1,
+        title: null,
+        description: null,
+        type: 'task',
+        time_start: null,
+        time_end: null,
+        isDisabled: false,
+        isCreating: true,
+      },
+    ]);
+    setEditingValue({});
+  }, []);
   return (
     <div>
       <table className={style.table}>

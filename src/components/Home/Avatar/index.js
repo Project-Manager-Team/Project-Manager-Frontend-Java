@@ -1,10 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { FaArrowAltCircleLeft } from "react-icons/fa";
 import { RxAvatar } from "react-icons/rx";
 import "./Avatar.css";
 import { API_BASE_URL } from "../Table/api";
 import { showError, showSuccess } from "../Table/swal";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Avatar() {
   const navigate = useNavigate();
@@ -15,6 +15,7 @@ function Avatar() {
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [newPassword2, setNewPassword2] = useState("");
+  const AvatarRef = useRef(null);
 
   useEffect(() => {
     const getUser = async () => {
@@ -44,15 +45,15 @@ function Avatar() {
   const changePassword = async () => {
     const accessToken = localStorage.getItem("access");
     try {
-      const response = await fetch(`${API_BASE_URL}/users/change-password/`, {
+      const response = await fetch(`${API_BASE_URL}/user/change-password/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${accessToken}`,
         },
         body: JSON.stringify({
-          oldPassword,
-          newPassword,
+          old_password: oldPassword,
+          new_password: newPassword,
         }),
       });
       if (response.status !== 200) {
@@ -81,8 +82,21 @@ function Avatar() {
     setChangePass(false);
   };
 
+  const handleClickOutside = (event) => {
+    if (AvatarRef.current && !AvatarRef.current.contains(event.target)) {
+      setShowInfo(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);  
+
   return (
-    <div className="avatar">
+    <div className="avatar" ref = {AvatarRef}>
       <div className="avatar__icon">
         <RxAvatar onClick={handleShowInfo} />
       </div>
@@ -104,9 +118,7 @@ function Avatar() {
       ) : (
         <div className="avatar__changePassForm">
           <FaArrowAltCircleLeft onClick={handleBackInfo} />
-          <h3
-            style={{ textAlign: "center", marginBottom: "15px", color: "#333" }}
-          >
+          <h3>
             Đổi Mật Khẩu
           </h3>
           <input

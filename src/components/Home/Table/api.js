@@ -1,4 +1,4 @@
-export const API_BASE_URL = "http://localhost:8080/api";
+export const API_BASE_URL = "https://weary-coffin-pjjrwp7xr9rx25wg-8000.app.github.dev/api";
 export async function updateProject(accessToken, url, editedValue) {
   try {
     const response = await fetch(url, {
@@ -15,24 +15,6 @@ export async function updateProject(accessToken, url, editedValue) {
     }
 
     return await response.json();
-  } catch (error) {
-    throw error;
-  }
-}
-export async function putProject(accessToken, url, editedValue) {
-  try {
-    const response = await fetch(url, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
-      },
-      body: JSON.stringify(editedValue),
-    });
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
   } catch (error) {
     throw error;
   }
@@ -82,10 +64,12 @@ export const createProject = async (accessToken, url, projectData) => {
       Authorization: `Bearer ${accessToken}`,
     },
     body: JSON.stringify({
-      ...projectData,
+      ...projectData, 
     }),
   });
   if (!response.ok) {
     throw new Error("Failed to create project");
   }
+
+  return await response.json();
 };

@@ -3,14 +3,15 @@ import Notification from "../../components/Home/Notification";
 import HistoryBar from "../../components/Home/HistoryBar";
 import Table from "../../components/Home/Table/Table";
 import Avatar from "../../components/Home/Avatar";
+import ProjectVisualize from "../../components/Home/ProjectVisualize";
 import styles from "./index.module.css";
 import { API_BASE_URL } from "../../components/Home/Table/api";
 function Home() {
   const [reloadTableData, setReloadTableData] = useState(false);
   const [history, setHistory] = useState([
     {
-      url: `${API_BASE_URL}/projects/`,
-      name: "Home",
+      url: `${API_BASE_URL}/project/personal/`,
+      title: "Home",
     },
   ]);
 
@@ -18,7 +19,7 @@ function Home() {
     <div className={styles.homeContainer}>
       <div className={styles.historyWrapper}>
         <HistoryBar
-          setReloadTableData={setReloadTableData} 
+          setReloadTableData={setReloadTableData}
           history={history}
           setHistory={setHistory}
         />
@@ -37,6 +38,11 @@ function Home() {
           setHistory={setHistory}
           current={history[history.length - 1]}
         />
+        {history.length > 1 && (
+          <div className={styles.projectVisualizeWrapper}>
+            <ProjectVisualize current={history[history.length - 1]} />
+          </div>
+        )}  
       </div>
     </div>
   );

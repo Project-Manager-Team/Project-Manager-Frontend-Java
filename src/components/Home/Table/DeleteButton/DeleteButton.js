@@ -13,7 +13,7 @@ function DeleteButton({ projectID, accessToken, setReloadTableData }) {
       try {
         await deleteProject(
           accessToken,
-          `${API_BASE_URL}/projects/${projectID}/`
+          `${API_BASE_URL}/project/${projectID}/`
         );
         await showSuccess("Deleted project successfully");
       } catch (error) {
@@ -25,7 +25,7 @@ function DeleteButton({ projectID, accessToken, setReloadTableData }) {
 
   return (
     <button className={style.button} onClick={() => handleDeleteItem()}>
-      <AiOutlineDelete />
+      <AiOutlineDelete/>
     </button>
   );
 }

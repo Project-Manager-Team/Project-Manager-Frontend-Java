@@ -1,9 +1,17 @@
-/* Home.module.css */
 .homeContainer {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  padding-top: 60px; /* Space for the fixed top bar */
+  padding-top: 60px;
+  background: linear-gradient(90deg, #22E1FF, #1D8FE1, #625EB1);
+  background-size: 300% 300%;
+  animation: gradientBackground 10s ease infinite;
+}
+
+@keyframes gradientBackground {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .historyWrapper {
@@ -17,10 +25,10 @@
   right: 0;
   background-color: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
-  padding: 10px 20px; /* Adjusted padding */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-  height: 60px; /* Set a fixed height for the top bar */
+  padding: 10px 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  height: 60px;
 }
 
 .notificationWrapper {
@@ -28,15 +36,15 @@
   align-items: center;
   margin-right: 0px;
 }
+
 .avatarWrapper {
-  display: flex;
   align-items: center;
-  margin-right: 10%; /* Align to the right without fixed position */
+  margin-right: 10px;
 }
 
 .tableWrapper {
   flex: 1;
-  padding: 0 80px; /* Left and right padding */
+  padding: 0 80px;
   overflow-y: auto;
-  margin-top: 60px; /* Space below the fixed top bar */
+  margin-top: 60px;
 }

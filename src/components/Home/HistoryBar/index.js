@@ -1,8 +1,10 @@
-// History.js
-import React from "react";
+import React, { useState } from "react";
 import styles from "./History.module.css";
 
-const HistoryBar = ({ history, setHistory, setReloadTableData }) => {
+const HistoryBar = ({ history, setHistory }) => {
+  const [showMore, setShowMore] = useState(false);
+  const maxVisibleIcons = 0;
+
   const handleHistory = (index) => {
     setHistory(history.slice(0, index + 1));
   };
@@ -16,20 +18,55 @@ const HistoryBar = ({ history, setHistory, setReloadTableData }) => {
         <span className={styles.icon}>🏠</span>
       </button>
 
-      {history.slice(1).map((item, index) => (
-        <React.Fragment key={item.id}>
-          <span className={styles.arrow}>➔</span>
-          <button
-            className={styles.historyButton}
-            onClick={() => {
-              handleHistory(index + 1);
-            }}
-          >
-            <span className={styles.icon}>📁</span>
-            {item.name}
-          </button>
-        </React.Fragment>
-      ))}
+      {history.length > 1 && (
+        <>
+          {history.slice(1, maxVisibleIcons + 1).map((item, index) => (
+            <React.Fragment key={item.id}>
+              <span className={styles.arrow}>➔</span>
+              <button
+                className={styles.historyButton}
+                onClick={() => {
+                  handleHistory(index + 1);
+                }}
+              >
+                <span className={styles.icon}>📁</span>
+                {item.title}
+              </button>
+            </React.Fragment>
+          ))}
+
+          {history.length > maxVisibleIcons + 1 && (
+            <>
+              <span className={styles.arrow}>➔</span>
+              <button
+                className={styles.historyButton}
+                onClick={() => {
+                  setShowMore(!showMore);
+                }}
+              >
+                <span className={styles.icon}>…</span>
+                {showMore ? "Ẩn" : `${history.length - maxVisibleIcons - 1} More`}
+              </button>
+            </>
+          )}
+
+          {showMore &&
+            history.slice(maxVisibleIcons + 1).map((item, index) => (
+              <React.Fragment key={item.id}>
+                <span className={styles.arrow}>➔</span>
+                <button
+                  className={styles.historyButton}
+                  onClick={() => {
+                    handleHistory(index + maxVisibleIcons + 1);
+                  }}
+                >
+                  <span className={styles.icon}>📁</span>
+                  {item.title}
+                </button>
+              </React.Fragment>
+            ))}
+        </>
+      )}
     </div>
   );
 };

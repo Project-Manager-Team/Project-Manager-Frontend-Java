@@ -1,4 +1,3 @@
-// Hàm để hiển thị thông báo thành công
 import Swal from "sweetalert2/dist/sweetalert2.js";
 
 export async function showSuccess(message) {
@@ -11,7 +10,6 @@ export async function showSuccess(message) {
   });
 }
 
-// Hàm để hiển thị thông báo lỗi
 export async function showError(message) {
   await Swal.fire("Error", message, "error");
 }
@@ -28,12 +26,10 @@ export async function showConfirm(message) {
   });
 }
 
-// Hàm để hiển thị thông báo cảnh báo
 export async function showWarning(message) {
   await Swal.fire("Warning", message, "warning");
 }
 
-// Hàm để hiển thị thông báo thông tin
 export async function showInfo(message) {
   await Swal.fire("Info", message, "info");
 }

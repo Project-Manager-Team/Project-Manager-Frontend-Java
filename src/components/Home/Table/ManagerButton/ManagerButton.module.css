@@ -1,59 +1,60 @@
-/* ManagerButton.module.css */
-.manager {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 20px 0;
-}
-
-.manager th,
-.manager td {
-  padding: 10px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-}
 input {
   width: 300px;
-}
-.manager th {
-  background-color: #f2f2f2;
-  font-weight: bold;
-}
-
-.manager input[type="text"] {
-  width: 300px;
-  padding: 8px;
+  padding: 5px;
   border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.button__cancel {
-  width: 100%;
-  background-color: #ff4d4d;
-  color: white;
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  width: auto;
+  transition: transform 0.3s ease-in-out;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  z-index: 1;
+}
+
+button {
+  padding: 5px 10px;
   border: none;
-  border-radius: 4px;
-  padding: 10px 20px;
+  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-top: 10px;
+  transition: transform 0.3s ease;
 }
 
-.button__cancel:hover {
-  background-color: #ff1a1a;
+button:hover {
+  transform: scale(1.1);
 }
 
 .button__add {
   width: 100%;
-  background-color: rgba(66, 135, 245, 0.6);
-  color: white;
+  background-color: rgb(255, 174, 0);
+  color: #000000;
   border: none;
-  border-radius: 4px;
+  border-radius: 12px;
   padding: 10px 20px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .button__add:hover {
-  background-color: #45a049;
+  background-color: #00a6ff;
+}
+
+.button__cancel {
+  background-color: #ff4d4d;
 }

@@ -1,0 +1,201 @@
+/* Nền */
+.vh-100 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(45deg, #f58529, #dd2a7b, #8134af, #515bd4);
+  background-size: 300% 300%;
+  animation: gradientBackground 8s ease infinite;
+}
+
+@keyframes gradientBackground {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Container cho form */
+.form-container {
+  width: 100%;
+  max-width: 600px;
+}
+
+/* Card */
+.card {
+  border-radius: 8px;
+  border: none;
+  background-color: #ffffff; 
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: height 0.5s ease;
+}
+
+.card-body {
+  padding: 40px;
+}
+
+/* Tiêu đề */
+h3 {
+  color: #833AB4;
+  text-align: center;
+}
+
+/* Form */
+.form-outline {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  font-weight: bold;
+}
+
+/* Input */
+.form-control {
+  width: 100%; 
+  border: 1px solid #cccccc;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+  padding: 10px;
+}
+
+.form-outline input[type="text"],
+.form-outline input[type="password"],
+.form-outline input[type="email"] {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #adadad;
+  border-radius: 4px;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
+}
+
+.form-outline input[type="text"]:hover,
+.form-outline input[type="password"]:hover,
+.form-outline input[type="email"]:hover {
+  border-color: #FD1D1D;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+  transform: scale(1.01);
+}
+
+/* Submit */
+.custom-btn {
+  background: linear-gradient(45deg, #FD1D1D, #f58529, #833AB4);
+  color: #ffffff;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  width: 100%;
+  position: relative;
+}
+
+.custom-btn:hover {
+  transform: translate(0, -3px) scale(1.05);
+  background: linear-gradient(45deg, #833AB4, #FD1D1D, #f58529);
+}
+
+.custom-btn:active {
+  transform: translate(0, 0) scale(0.95);
+  background: linear-gradient(45deg, #FD1D1D, #f58529, #833AB4);
+}
+
+/* Nhớ pass */
+.form-check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+.form-check input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #adadad;
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+  margin: 0;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.form-check input[type="checkbox"]:checked {
+  background-color: #FD1D1D;
+  border-color: #FD1D1D;
+  position: relative;
+}
+
+.form-check-label {
+  font-size: 16px;
+  color: #000000;
+  line-height: 1;
+  cursor: pointer;  
+  transition: color 0.2s;
+}
+
+.form-check:hover input[type="checkbox"] {
+  border-color: #FD1D1D;
+}
+
+.form-check:hover .form-check-label {
+  color: #FD1D1D;
+}
+
+
+/* Chuyển đăng ký */
+.link-btn {
+  background-color: #ffffff;
+  color: #f58529;
+  font-weight: bold;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.link-btn:hover {
+  transform: scale(1.05);
+  color: #f58529;
+}
+
+.link-btn:active {
+  transform: scale(0.95);
+  color: #f58529;
+}
+
+.d-flex {
+  display: flex;
+  align-items: center;
+}
+
+.ml-2 {
+  margin-left: 8px;
+}
+
+/* Text Center */
+.text-center {
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+/* Hiệu ứng chuyển trang */
+
+.slide-in {
+  animation: slideIn 1s forwards;
+}
+@keyframes slideIn {
+  from {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

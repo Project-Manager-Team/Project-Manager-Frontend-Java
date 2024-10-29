@@ -5,45 +5,25 @@ import { showSuccess, showError } from "../swal";
 import { MdCancel } from "react-icons/md";
 import { API_BASE_URL } from "../api";
 import { RiUserAddFill } from "react-icons/ri";
-import styles from "./ManagerButton.module.css";
-// Đặt gốc của ứng dụng để Modal có thể hoạt động
+import styles from './ManagerButton.module.css'
+
 Modal.setAppElement("#root");
 
 function Manager({ item }) {
   const [isOpen, setIsOpen] = useState(false);
 
-  // Hàm để mở Modal
   const openModal = () => {
     setIsOpen(true);
   };
 
-  // Hàm để đóng Modal
   const closeModal = () => {
     setIsOpen(false);
   };
 
-  const customStyles = {
-    content: {
-      top: "50%",
-      left: "50%",
-      right: "auto",
-      bottom: "auto",
-      marginRight: "-50%",
-      transform: "translate(-50%, -50%)",
-      backgroundColor: "#fff",
-      padding: "20px",
-      borderRadius: "10px",
-      width: "auto",
-    },
-    overlay: {
-      backgroundColor: "rgba(0, 0, 0, 0.75)",
-    },
-  };
-
   const [data, setData] = useState({
     title: "",
-    description: "",
-    receiver: "",
+    context: "",
+    username: "",
   });
 
   const handleChange = (e) => {
@@ -69,13 +49,15 @@ function Manager({ item }) {
     if (!response.ok) {
       throw new Error("Failed to create project");
     }
+
+    return await response.json();
   };
 
   const handleInvitation = async () => {
     try {
       await invitation(
         accessToken,
-        `${API_BASE_URL}/projects/${item.id}/invite/`
+        `${API_BASE_URL}/invitation/`
       );
       await showSuccess("Gửi lời mời thành công");
     } catch (error) {
@@ -85,56 +67,43 @@ function Manager({ item }) {
   };
 
   return (
-    <>
-      {item.manager_name == null ? (
-        <div>
-          <button onClick={openModal} className={styles.button__add}>
-            <RiUserAddFill />
-          </button>
-          <Modal
-            isOpen={isOpen}
-            onRequestClose={closeModal}
-            contentLabel="Example Modal"
-            style={customStyles}
-          >
-            <table className="manager">
-              <tbody>
-                <tr>
-                  <th>Title</th>
-                  <td>
-                    <input type="text" name="title" onChange={handleChange} />
-                  </td>
-                </tr>
-                <tr>
-                  <th>decription</th>
-                  <td>
-                    <input
-                      type="text"
-                      name="description"
-                      onChange={handleChange}
-                    />
-                  </td>
-                </tr>
-                <tr>
-                  <th>Receiver</th>
-                  <td>
-                    <input
-                      type="text"
-                      name="receiver"
-                      onChange={handleChange}
-                    />
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <button onClick={handleInvitation}>Thêm</button>
-            <MdCancel onClick={closeModal} className="button__cancel" />
-          </Modal>
-        </div>
-      ) : (
-        <>{item.manager_name}</>
-      )}
-    </>
+    <div>
+      <button onClick={openModal} className={styles.button__add}>
+        <RiUserAddFill />
+      </button>
+      <Modal
+        isOpen={isOpen}
+        onRequestClose={closeModal}
+        contentLabel="Example Modal"
+        className={styles.modal}
+        overlayClassName={styles.overlay}
+      >
+      <table className="manager">
+        <tbody>
+           <tr>
+            <th>Title</th>
+            <td>
+              <input type="text" name="title" onChange={handleChange} />
+            </td>
+          </tr>
+          <tr>
+            <th>Context</th>
+            <td>
+              <input type="text" name="context" onChange={handleChange} />
+            </td>
+          </tr>
+          <tr>
+            <th>Receiver</th>
+            <td>
+              <input type="text" name="username" onChange={handleChange} />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <button className="add" onClick={handleInvitation}>Thêm</button>
+      <MdCancel onClick={closeModal} className="button__cancel" />
+      </Modal>
+    </div>
   );
 }
 
